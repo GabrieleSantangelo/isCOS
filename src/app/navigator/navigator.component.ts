@@ -49,7 +49,7 @@ export class NavigatorComponent implements OnInit, DoCheck {
   filteredCity: any[] = [];
   selectedCity: any[] = [];
   token =
-    'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
+    'pk.eyJ1Ijoic2FudGFsMTIxMCIsImEiOiJjbTQ2dnRwM2UxOWcwMmtxeHRqd2ppZmhjIn0.PMYKUNf0nPFK5soI4Eu10w';
 
   constructor(
     private renderer: Renderer2,

@@ -15,6 +15,7 @@ import { AuthService } from '../../service/auth.service';
 import { TreeNode } from 'primeng/api';
 import { DialogsService } from '../../service/dialogs.service';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -47,9 +48,13 @@ export class LoginComponent implements OnInit {
   userdata: any;
   changePasswordDialog: boolean = false;
   confirmChangePasswordDialog: boolean = false;
+  confirmAccountDialog: boolean = false;
 
   ngOnInit(): void {
-    
+    this.dialogsService.currentConfirmDialog.subscribe(
+      (confirmAccountDialog) =>
+        (this.confirmAccountDialog = confirmAccountDialog)
+    );
   }
 
   onToggle() {
@@ -60,7 +65,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private userService: userService,
-    private dialogService: DialogsService,
+    private dialogsService: DialogsService,
     private messageService: MessageService,
     private router: Router
   ) {}
@@ -76,7 +81,7 @@ export class LoginComponent implements OnInit {
   });
 
   sendLoginRequest() {
-    console.log(this.form.value);
+    // console.log(this.form.value);
     this.form.reset();
   }
   checkCorrectPassword() {
@@ -89,14 +94,22 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/gestione']);
       },
       (error) => {
-        if (error.status === 404) {
+        if (error.status == 400 && error.error?.code == 102){
+          this.messageService.add({
+            severity: 'info',
+            summary: 'Info',
+            detail: 'Account must be activated',
+          });
+          this.showConfirmAccount();  
+        } 
+        else if (error.status === 404) {
           this.messageService.add({
             severity: 'error',
             summary: 'Errore',
             detail: 'User not found',
           });
         }
-        if (error.status === 400) {
+        else if (error.status === 400) {
           this.messageService.add({
             severity: 'error',
             summary: 'Errore',
@@ -106,5 +119,7 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  
+  showConfirmAccount() {
+    this.dialogsService.changeConfirmDialog(true);
+  }
 }

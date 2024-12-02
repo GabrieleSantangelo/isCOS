@@ -12,7 +12,7 @@ export class GlobeComponent {
   lat = 37.75;
   lng = -122.41;
   token: string =
-    'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
+    'pk.eyJ1Ijoic2FudGFsMTIxMCIsImEiOiJjbTQ2dnRwM2UxOWcwMmtxeHRqd2ppZmhjIn0.PMYKUNf0nPFK5soI4Eu10w';
   constructor(private renderer: Renderer2) { }
   ngOnInit() {
 
@@ -230,7 +230,7 @@ export class GlobeComponent {
     mapboxCssLink.type = 'text/css';
     this.renderer.appendChild(document.head, mapboxCssLink);
     const token =
-      'pk.eyJ1IjoidW1iZXJ0b2ZyYW5jZXNjbyIsImEiOiJjbG45d3B5NTcwYW5vMmpsNWZraHVxaXF1In0.doKaW59JSUO2QRP9IR6jgA';
+      'pk.eyJ1Ijoic2FudGFsMTIxMCIsImEiOiJjbTQ2dnRwM2UxOWcwMmtxeHRqd2ppZmhjIn0.PMYKUNf0nPFK5soI4Eu10w';
     (mapboxgl as any).accessToken = token;
     const map = new mapboxgl.Map({
       container: 'map',
